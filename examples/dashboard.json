@@ -1,0 +1,12 @@
+{
+  "type":"dashboard", "theme":"signal",
+  "data":{
+    "eyebrow":"ENGINEERING / SYSTEM HEALTH","title":"Validation overview","subtitle":"One page for the measurements and the decisions that follow","period":"2026 Q4",
+    "kpis":[{"label":"Test coverage","value":"92%","note":"Illustrative sample data"},{"label":"Regression pass","value":"98.2%","note":"Illustrative sample data"},{"label":"Median latency","value":"18 ms","note":"Illustrative sample data"},{"label":"Open findings","value":"07","note":"Illustrative sample data"}],
+    "chartTitle":"TEST EXECUTION","chartHeading":"Coverage by subsystem",
+    "chart":[{"label":"Memory","value":88},{"label":"Networking","value":74},{"label":"Storage","value":95},{"label":"Firmware","value":64}],
+    "insights":["Firmware coverage is the lowest in this illustrative dataset.","A high pass rate should be paired with negative-test coverage.","Investigate the seven unresolved findings before sign-off."],
+    "source":"Sample data only; replace with a cited real dataset.",
+    "footer":"INTERNAL DEMO / PERSONAL DESIGN STUDIO"
+  }
+}

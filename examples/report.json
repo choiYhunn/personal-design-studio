@@ -1,0 +1,13 @@
+{
+  "type":"report", "theme":"editorial",
+  "data":{
+    "title":"Engineering Design Review","subtitle":"Decision memo for a robust validation workflow","kicker":"TECHNICAL MEMORANDUM","organization":"ENGINEERING / 2026","author":"Systems Team","date":"2026-11-07",
+    "executiveSummary":"Adopt a reproducible verification loop that connects requirements, test cases, observations, and defensible engineering decisions.",
+    "sections":[
+      {"heading":"Context","body":"A successful build alone does not establish system quality. The workflow must preserve the relationship between test configuration, input stimuli and observed behavior.","bullets":["Specify the measured outcome.","Record assumptions and environmental constraints."]},
+      {"heading":"Recommended approach","body":"Use an incremental experiment plan, maintain raw evidence and compare at least two plausible hypotheses before locking the implementation.","bullets":["Keep an auditable log of every run.","Include adverse and boundary scenarios.","Separate measurements from interpretation."]},
+      {"heading":"Acceptance criteria","body":"Accept the design when functional checks pass, unresolved limitations are explicitly recorded and a second engineer can reproduce the result."}
+    ],
+    "sources":["Internal requirements document (replace with traceable source)","Measurement log and test protocol (replace with traceable source)"]
+  }
+}

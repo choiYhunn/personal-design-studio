@@ -1,0 +1,13 @@
+{
+  "type":"slides", "theme":"technical",
+  "data":{
+    "title":"From Measurement to Decision", "subtitle":"Technical presentation example", "author":"Engineering Team", "organization":"SYSTEMS RESEARCH", "year":"2026", "kicker":"SYSTEM VALIDATION",
+    "slides":[
+      {"layout":"cover","title":"From measurement to decision","subtitle":"A concise framework for systems validation","kicker":"RESEARCH BRIEF · 2026"},
+      {"layout":"statement","title":"A higher average is not always a better system.","subtitle":"Distribution, tail latency and reproducibility must inform the decision.","emphasis":"Quality = verified behavior under real constraints"},
+      {"layout":"metrics","title":"What we measure","subtitle":"Three signals that guide the investigation","metrics":[{"value":"P99","label":"Tail behavior","note":"Track extreme delays, not only averages"},{"value":"Δt","label":"Arrival jitter","note":"Separate traffic structure from load"},{"value":"N ≥ 3","label":"Repeatability","note":"Confirm the pattern across independent runs"}]},
+      {"layout":"columns","title":"Evidence → interpretation","subtitle":"Do not treat an attractive chart as proof","columns":[{"heading":"Evidence","bullets":["Controlled inputs","Raw traces","Configuration records"]},{"heading":"Decision","bullets":["State assumptions","Compare distributions","Document limitations"]}]},
+      {"layout":"timeline","title":"Next steps","subtitle":"Make each claim verifiable","steps":[{"heading":"Frame","detail":"Define the question and failure criteria."},{"heading":"Measure","detail":"Capture representative repeated observations."},{"heading":"Decide","detail":"Choose based on evidence and uncertainty."}]}
+    ]
+  }
+}

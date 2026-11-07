@@ -1,0 +1,18 @@
+{
+  "type": "cv", "theme": "classic",
+  "data": {
+    "year": "2026", "name": "Kim Jiyun", "role": "Embedded Systems & Validation Engineer",
+    "contact": ["Seoul, Korea", "kim.jiyun@sample.net", "github.com/username", "linkedin.com/in/username"],
+    "summary": "Engineer specializing in embedded Linux, system-level validation and reproducible debugging. Designs tests from hypotheses, analyzes logs and traces, and documents failure localization with measurable evidence.",
+    "experience": [
+      {"role":"System Validation Intern", "organization":"Example Semiconductor · Memory Solutions", "period":"2026", "bullets":["Created repeatable workload and error-analysis procedures for a DDR5 validation environment.","Reduced manual triage by linking configuration, timestamps and observed failures."]}
+    ],
+    "projects": [
+      {"name":"CAN-FD Timing Evaluation", "stack":"Python · CAN-FD · statistics", "period":"2026", "bullets":["Compared frame arrival jitter across controlled bus load and traffic-pattern scenarios.","Validated conclusions using repeated runs, distributions and documented constraints."]},
+      {"name":"Microcontroller Platform", "stack":"C · RTOS · UART/SPI", "period":"2025", "bullets":["Implemented firmware and hardware-in-the-loop tests for device communication."]}
+    ],
+    "education":[{"school":"Example University", "degree":"B.S. in Electrical Engineering", "period":"2022–2027", "note":"Coursework: Computer Architecture, Embedded Software, Digital Systems"}],
+    "skills":[{"category":"Programming", "items":["C/C++","Python","Linux","Git"]},{"category":"Systems", "items":["DDR5 basics","CAN-FD","RTL","MCU debugging"]},{"category":"Validation", "items":["Experiment design","Regression testing","Log analysis"]}],
+    "awards": ["Engineering project showcase — team award"],"languages":["Korean (native)","English (working)"]
+  }
+}
