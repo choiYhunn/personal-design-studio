@@ -33,7 +33,18 @@ In the visual studio, choose a workspace, edit key fields, or switch to **Advanc
 
 When you **open this repository as the working directory**, Codex reads `AGENTS.md` and discovers `.agents/skills/personal-design-studio/SKILL.md`; Claude Code reads `CLAUDE.md` and discovers `.claude/skills/personal-design-studio/SKILL.md`. A relevant design request **can** activate the skill automatically, but agent choice is not guaranteed; you can explicitly invoke `$personal-design-studio` in Codex or `/personal-design-studio` in Claude Code. The legacy `/design` Claude command is also available.
 
-This is **repository-scoped**. Opening a different project or a general chat does not automatically load this tool. Installing it for all projects requires a separate user-level skill setup. The core tool also does not autonomously call Oh My Design or slides-grab; those are optional, external integrations.
+By default this is **repository-scoped**. To make the skill available when working in **other local repositories**, opt in once on your own machine:
+
+```bash
+npm run install:agents -- --dry-run
+npm run install:agents
+# To update an existing user-level installation later:
+npm run install:agents -- --force
+```
+
+The installer writes only to your local `~/.agents/skills/personal-design-studio/` (Codex) and `~/.claude/skills/personal-design-studio/` (Claude Code), never edits other repositories, and refuses to overwrite an existing skill unless `--force` is supplied. Restart the agent if it does not discover the new skill. Matching design tasks **may** invoke it automatically; explicit invocation remains more reliable. User-level skills on your Windows PC are not automatically shared with cloud Codex or ChatGPT; install them in each execution environment. Both local/project and user-level copies may appear while working in this repository.
+
+The core tool does not autonomously call Oh My Design or slides-grab; those are optional, external integrations.
 
 ### If the browser says Forbidden
 
