@@ -1,55 +1,24 @@
 ---
 name: personal-design-studio
-description: Create and critically review CVs, research presentations, reports, and dashboards from verified material using a reproducible local-first design workflow.
+description: Create or revise CVs, research slides, reports and dashboards from user documents in the local Personal Design Studio; verify facts and rendered layout before delivery.
 ---
 
-# /design — evidence-led personal studio
+# Personal Design Studio
 
-## Routing
+Use the studio for a requested CV, resume, portfolio, presentation, report or dashboard. Determine whether “CV” means curriculum vitae or computer vision before selecting an artifact. Read `README.md` for supported formats and `docs/DEVELOPMENT.md` when changing studio code.
 
-- CV, resume, academic CV, personal portfolio → `cv`.
-- Presentation, seminar, research talk, project pitch, card-style slides → `slides`.
-- Memo, design review, technical report, proposal → `report`.
-- Dashboard, metric visual, experiment overview → `dashboard`.
-- If `CV` refers to *computer vision* rather than a curriculum vitae, determine the requested artifact first; do not assume it is a resume.
+## Work with source material
 
-## Workflow
+- Preserve the user's claims, names, dates and numbers. Mark unknowns instead of inventing achievements. Keep private CVs, company data and research files outside this public repository.
+- For TXT, MD, DOCX, PDF or PPTX input, use `node bin/studio.mjs import <file> --type <cv|slides|report|dashboard> -o <new-project.json>`. This extracts content locally. Read `sourceDocuments`, parser warnings and `provenance`; review the extraction before designing. A scanned PDF may have no text, and PPTX layout is not reconstructed.
+- Existing v0.1 and v2 project JSON can be used directly with `audit` and `build`. Do not overwrite a user's project without their direction. An imported project is a new draft, not a verified factual rewrite.
 
-1. **Preflight.** Read the request and available documents, their privacy boundaries, current project, language, audience, and deliverable. Preserve stated constraints. If critical information is missing, mark it as unknown; never fill with fabricated specifics.
-2. **Evidence ledger.** List each important factual assertion or number and its source. Distinguish user-provided claims, external references, and illustrative figures. Do not reproduce private company data in a public repo.
-3. **Frame.** Write a single-sentence decision goal, primary reader, medium, content priority, and expensive-to-misread detail.
-4. **Explore.** Offer two distinct aesthetic directions where warranted; compare layout, hierarchy, type scale, density, color, print and editing constraints. Avoid surface-only variations.
-5. **Build.** Create a project JSON per `examples/*.json`; choose theme from `editorial`, `technical`, `classic`, `signal`. Build with `node bin/studio.mjs build project.json -o output.html`. Prefer reusable data arrays and consistent spacing.
-6. **Deterministic audit.** Run `node bin/studio.mjs audit project.json --strict`. Fix errors and explicitly judge whether warnings should block publication. Run `npm test` if code is changed.
-7. **Visual review.** Open the rendered HTML in a browser, inspect typography, clipping, hierarchy, page balance, print mode, and mobile viewport where relevant. Screenshot and compare revisions if browser support exists. Audit results are *not* visual approval.
-8. **Deliver.** Include editable JSON, self-contained HTML, PDF if reliable, sources/evidence ledger, and a short limitation note. PPTX or DOCX must be tested independently; never imply that an image-only PPTX is editable.
+## Design and verification
 
-## Medium-specific bar
+1. Clarify audience, document purpose, format and any privacy boundary from the request. For substantial work, render two meaningfully different directions using the same factual content.
+2. Select typography and layout for reading order, density, print size and language. The browser editor at `npm start` and CLI use the same project model and renderer. Use the browser for ordinary item editing and visual review; JSON is optional advanced editing.
+3. Run `node bin/studio.mjs audit <project.json>` and `node bin/studio.mjs build <project.json> -o <output.html>`. If code changed, run `npm test` and `npm run check`.
+4. Inspect the actual rendered output, including first, densest and last slide or printed A4 pages. Check clipping, font fallback, contrast, links, chart units/denominators/time windows and source notes. An audit pass is not visual approval.
+5. Deliver the editable JSON and standalone HTML. Provide PDF only after checking its pagination. Do not claim editable DOCX/PPTX output; the studio does not provide it.
 
-### CV
-
-- Use role-relevant claims with dates and outcomes, but only when verified.
-- Keep reading order linear; use unambiguous section headings and text, not rasterized biography.
-- Do not add invented percentile, GPA, impact statistics, or company endorsement.
-- Inspect actual printed A4 page count. Links must be user-confirmed.
-
-### Slides
-
-- State a takeaway in each title. Prefer legible slide density and essential visuals.
-- Support every number or research claim with a visible reference or source note.
-- During review inspect at least first, densest and final slides at 16:9.
-- If converting to PPTX, check opening, fonts, layout, and editability in a presentation app.
-
-### Report
-
-- Maintain argument structure: question → method → evidence → limits → decision.
-- Preserve source citations, chart units and caveats.
-
-### Dashboard
-
-- Label measured vs illustrative data; never let a decorative KPI imply live integration.
-- Verify axes, denominators, time windows, chart scales, and contrast.
-
-## Integration
-
-Optional OMD and slides-grab tools can be installed separately to add reference discovery or region-based editing. They are *not* automatic dependencies. See `docs/INTEGRATIONS.md`.
+`node bin/studio.mjs fonts list` shows available local font pairings. Browser and exported HTML use self-hosted fonts with OFL notices. Optional Oh My Design and slides-grab are separate, nonessential workflows in `docs/INTEGRATIONS.md`; detect their installation before proposing a command that depends on them. The agent may be discovered automatically, but `$personal-design-studio` or `/personal-design-studio` remains the explicit route.
