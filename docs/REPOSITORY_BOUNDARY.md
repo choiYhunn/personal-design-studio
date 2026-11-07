@@ -8,11 +8,11 @@ This repository is the **sole source of truth for Personal Design Studio's imple
 
 ## Transfer record
 - Date: 2026-11-07 (KST).
-- Source: private `choiYhunn/ai-shared-brain` Draft PR #321, branch `feat/personal-design-studio-v0-1`, implementation folder `tools/personal-design-studio/`.
+- Source: private staging repository (identifiers intentionally omitted from the public project).
 - Destination: public `choiYhunn/personal-design-studio`, root of this repository.
 - Baseline: 18 textual source files; CI paths updated for root; ignore patterns strengthened for personal data and secrets.
-- The old Draft PR is migration provenance, not an active development source.
-- Shared Brain retains only a small project pointer in `sources/GITHUB_REPOS.md`.
+- The staging PR was closed without merge and its branch reset; prior source commits remain in private Git history.
+- The user's private cross-model memory repository will retain only a small source-of-truth pointer.
 
 ## Work on this tool
 Any future feature, template, integration, issue, PR, code, test, asset, or release belongs here, **not** in Shared Brain. Shared Brain may store durable user decisions or repo pointers but must never vendor or mirror this implementation.
