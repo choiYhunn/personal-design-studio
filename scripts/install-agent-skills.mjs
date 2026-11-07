@@ -32,7 +32,7 @@ if (args.some(x => x.startsWith('-') && !['--dry-run','--force','--home'].includ
     'Authoritative design workflow: `'+canonical+'`',
     'Command-line entrypoint: `'+bin+'`',
     '',
-    'When the user requests a relevant design artifact, first read the authoritative design workflow above. Create project JSON based on samples in that checkout, but save user-specific files only in the current working project or private workspace. Build with the CLI: `node "'+bin+'" build <project.json> -o <output.html>`. Run the audit and visually inspect the output, including page breaks. Do not invent factual claims. Do not commit private CVs or employer data to public repositories. Do not assume upstream Oh My Design or slides-grab is installed.',
+    'When the user requests a relevant design artifact, first read the authoritative design workflow above. Create project JSON based on samples in that checkout, but save user-specific files only in the current working project or private workspace. For user documents, use `node "'+bin+'" import <file> --type <cv|slides|report|dashboard> -o <new-project.json>`, inspect extracted text and provenance, then build with `node "'+bin+'" build <project.json> -o <output.html>`. Run the audit and visually inspect the output, including page breaks. Do not invent factual claims. Do not commit private CVs or employer data to public repositories. Do not assume upstream Oh My Design or slides-grab is installed.',
     '',
   ].join('\n');
   const locations = [

@@ -14,6 +14,9 @@ exports/
 *.jpeg
 *.docx
 *.pptx
+!tests/fixtures/sample.pdf
+!tests/fixtures/sample.docx
+!tests/fixtures/sample.pptx
 *.key
 *.pem
 .DS_Store

@@ -1,4 +1,68 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Personal Design Studio</title><style>
-:root{font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#e9eef8;background:#0c1120}*{box-sizing:border-box}body{margin:0}button,select,input,textarea{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:245px 380px 1fr;min-height:100vh}.sidebar{background:#0d1528;border-right:1px solid #29344c;padding:28px 19px;display:flex;flex-direction:column}.brand{font-size:19px;font-weight:800;letter-spacing:-.05em;line-height:1.35}.brand span{color:#7ed0c9}.subbrand{font-size:11px;letter-spacing:.15em;color:#8898b7;margin-top:8px}.label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#7c8eae;font-weight:800;margin:35px 12px 12px}.type{display:flex;gap:12px;align-items:center;width:100%;border:1px solid transparent;padding:12px;background:transparent;text-align:left;border-radius:9px;color:#9caec9;margin-bottom:5px}.type.active{background:#23364c;border-color:#3b586d;color:#fff}.type b{font-size:13px}.type small{display:block;color:#91a4bb;font-size:11px;margin-top:3px}.glyph{width:35px;height:35px;display:grid;place-items:center;background:#25394e;border-radius:8px;font-weight:800;color:#83d1c4}.end{margin-top:auto}.sidebar p{color:#91a4bb;font-size:11px;line-height:1.7}.editor{background:#151c2d;padding:26px;border-right:1px solid #2a3448;overflow:auto;max-height:100vh}.topline{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#8fd4cd;font-weight:800}.editor h1{font-size:23px;margin:11px 0 7px}.editor-description{font-size:12px;color:#9daec7;line-height:1.6;margin-bottom:23px}.field{margin-bottom:15px}.field label{display:block;font-size:12px;color:#b6c4d8;font-weight:700;margin-bottom:8px}.field input,.field textarea,.field select,.json-editor{border:1px solid #40506b;background:#10192a;border-radius:7px;color:#fff;padding:11px;width:100%;outline:0}.field input:focus,.field textarea:focus,.field select:focus,.json-editor:focus{border-color:#83d9ce}.field textarea{min-height:82px;resize:vertical}.tabs{display:flex;gap:5px;background:#0d1423;padding:4px;border-radius:9px;margin-bottom:24px}.tabs button{border:0;border-radius:7px;padding:10px;flex:1;color:#9babc2;background:transparent;font-size:12px;font-weight:700}.tabs button.active{background:#29435b;color:#fff}.hint{color:#8c9bb1;font-size:11px;line-height:1.6}.json-editor{height:48vh;white-space:pre;resize:vertical;font:11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.error{color:#ffad98;font-size:12px;margin:12px 0}.notice{font-size:12px;color:#8eabbd;line-height:1.65}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.btn{border:1px solid #435873;background:#29384e;color:#fff;border-radius:7px;padding:10px 12px;font-size:12px;font-weight:700}.btn.primary{background:#80d4c7;color:#0c2331;border-color:#80d4c7}.btn:hover{filter:brightness(1.12)}.preview{background:#edf0f5;color:#22314b;min-width:0;display:flex;flex-direction:column}.preview-header{height:77px;min-height:77px;border-bottom:1px solid #d5dbe5;padding:19px 27px;display:flex;justify-content:space-between;align-items:center;gap:20px}.preview-header h2{font-size:13px;margin:0}.preview-header small{display:block;color:#6a7484;font-size:11px;margin-top:5px}.preview-header .tag{background:#d9e9e6;color:#27695f;padding:6px 11px;border-radius:40px;font-size:11px;font-weight:700}.frame{flex:1;width:100%;border:0;background:#e9edf3}.audit{position:fixed;bottom:18px;right:24px;background:#fff;color:#293b50;border:1px solid #d5e0e9;padding:11px 15px;border-radius:8px;font-size:11px;box-shadow:0 10px 35px #13233a18;max-width:42vw}.audit.warn{border-color:#cda972}.audit strong{font-weight:800}.wide-actions{display:flex;gap:8px;margin-top:12px}.inline-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:1300px){.app{grid-template-columns:190px 310px 1fr}.editor{padding:20px}.sidebar{padding:20px 10px}}@media(max-width:950px){.app{grid-template-columns:195px 1fr}.preview{grid-column:1/-1;height:75vh}.editor{max-height:none}.audit{position:static;max-width:none;margin:10px}}@media(max-width:600px){.app{display:block}.sidebar{display:block}.brand{font-size:17px}.sidebar .label,.sidebar .end{display:none}.types{display:grid;grid-template-columns:1fr 1fr}.editor{max-height:none}.preview{height:75vh}.preview-header{padding:15px}.audit{position:static}}
-</style></head><body><div class="app"><aside class="sidebar"><div class="brand">PERSONAL<br><span>DESIGN STUDIO</span></div><div class="subbrand">MAKE · REVIEW · EXPORT</div><div class="label">Workspaces</div><div class="types" id="types"><button class="type active" data-type="cv"><span class="glyph">CV</span><span><b>CV & Resume</b><small>이력서 · 포트폴리오</small></span></button><button class="type" data-type="slides"><span class="glyph">S</span><span><b>Slides</b><small>발표 · 논문 · 피치</small></span></button><button class="type" data-type="report"><span class="glyph">R</span><span><b>Report</b><small>기술 보고서 · 제안서</small></span></button><button class="type" data-type="dashboard"><span class="glyph">D</span><span><b>Dashboard</b><small>데이터 · 웹 시각화</small></span></button></div><div class="end"><p>Local-first. No login. No AI API keys.<br>내용은 브라우저에만 저장됩니다.<br>실제 제출 전에 사실관계와 인쇄 결과를 검토하세요.</p></div></aside><section class="editor"><div class="topline">YOUR DESIGN WORKBENCH</div><h1 id="editor-title">CV & Resume</h1><p class="editor-description">내용을 입력하면 오른쪽에 즉시 반영됩니다. 고급 편집에서 전체 구조를 수정할 수 있습니다.</p><div class="tabs"><button id="tab-fields" class="active">빠른 편집</button><button id="tab-json">고급 JSON</button></div><div class="inline-controls"><div class="field"><label for="theme">디자인 테마</label><select id="theme"><option value="editorial">Editorial</option><option value="technical">Technical</option><option value="classic">Classic / ATS</option><option value="signal">Dark Signal</option></select></div><div class="field"><label for="file-upload">기존 프로젝트 불러오기</label><input id="file-upload" type="file" accept=".json,application/json"></div></div><div id="fields"></div><div id="advanced" hidden><p class="hint">배열(슬라이드 추가, 프로젝트 추가, 지표 추가 등)은 여기서 편집합니다. JSON 문법 오류가 있으면 미리보기를 갱신하지 않습니다.</p><textarea class="json-editor" id="json" spellcheck="false" aria-label="프로젝트 JSON"></textarea><p id="json-error" class="error"></p><button class="btn" id="apply-json">JSON 적용</button></div><div class="toolbar"><button class="btn primary" id="download-html">HTML 내려받기</button><button class="btn" id="download-json">프로젝트 저장</button><button class="btn" id="print">PDF 인쇄</button></div><p class="notice">발표자료는 HTML에서 페이지별 PDF로 인쇄하거나 <code>?present</code> 모드로 발표할 수 있습니다. PPTX로 변환할 때는 별도의 slides-grab 어댑터를 사용합니다.</p></section><section class="preview"><header class="preview-header"><div><h2>Live preview</h2><small id="preview-title">Preview of your current document</small></div><span class="tag" id="status">READY</span></header><iframe class="frame" id="frame" title="Design output preview"></iframe><div class="audit" id="audit">Design audit: waiting</div></section></div><script type="module" src="/studio/app.js"></script></body></html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Personal Design Studio</title>
+  <link rel="stylesheet" href="/studio/style.css">
+  <script type="importmap">{"imports":{"fflate":"/vendor/fflate/browser.js","pdfjs-dist":"/vendor/pdfjs/pdf.mjs"}}</script>
+  <script src="/vendor/mammoth.browser.min.js" defer></script>
+  <script type="module" src="/studio/app.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">PERSONAL <span>DESIGN STUDIO</span><small>로컬 디자인 작업실</small></div>
+    <div class="top-actions">
+      <button id="new-project" class="button">새 프로젝트</button>
+      <button id="undo" class="button" title="Ctrl+Z">↶ 되돌리기</button>
+      <button id="redo" class="button" title="Ctrl+Shift+Z">↷ 다시 하기</button>
+      <button id="compare" class="button">A/B 비교</button>
+      <button id="download-json" class="button">JSON 저장</button>
+      <button id="download-html" class="button primary">HTML 내보내기</button>
+      <button id="print" class="button">PDF 인쇄</button>
+    </div>
+  </header>
+  <aside class="left-panel">
+    <p class="overline">WORKSPACE</p>
+    <nav id="types" class="types" aria-label="문서 유형">
+      <button data-type="cv">CV / 이력서</button><button data-type="slides">슬라이드</button><button data-type="report">보고서</button><button data-type="dashboard">대시보드</button>
+    </nav>
+    <label class="field-label" for="projects">저장된 프로젝트</label><select id="projects"></select>
+    <p class="overline">DESIGN</p>
+    <div id="gallery" class="gallery"></div>
+    <p class="overline">IMPORT</p>
+    <label id="drop-zone" class="drop-zone" for="file-upload"><strong>파일을 놓거나 선택</strong><span>JSON · TXT · MD · DOCX · PDF · PPTX · PNG · JPG · SVG<br>여러 파일 선택 가능, 파일당 12 MiB</span></label>
+    <input id="file-upload" type="file" multiple accept=".json,.txt,.md,.docx,.pdf,.pptx,.png,.jpg,.jpeg,.svg" hidden>
+    <div id="import-list" class="import-list" aria-live="polite"></div>
+  </aside>
+  <main class="canvas-area">
+    <div class="canvas-header"><div><p class="overline">LIVE CANVAS</p><h1 id="canvas-title">프로젝트를 여는 중</h1></div><div id="save-status" class="save-status">준비 중</div></div>
+    <div class="canvas-grid"><iframe id="frame" title="현재 디자인 미리보기" sandbox="allow-same-origin allow-scripts"></iframe><iframe id="compare-frame" title="비교 디자인 미리보기" sandbox="allow-same-origin allow-scripts" hidden></iframe></div>
+    <div id="audit" class="audit" role="status">검사 중</div>
+  </main>
+  <aside class="right-panel">
+    <div class="panel-tabs"><button id="tab-content" class="active">내용</button><button id="tab-design">디자인</button><button id="tab-import">가져오기 <span id="import-count"></span></button><button id="tab-json">JSON</button></div>
+    <section id="content-panel" class="panel-content"><div id="fields"></div><div id="collections"></div></section>
+    <section id="design-panel" class="panel-content" hidden>
+      <label class="field-label" for="theme">색상 테마</label><select id="theme"></select>
+      <label class="field-label" for="font-pair">글꼴 조합</label><select id="font-pair"></select>
+      <details><summary>타이포그래피와 여백 조절</summary><div id="type-controls"></div></details>
+      <p class="hint">프리셋이 기본값을 정합니다. 필요한 값만 조절하세요. PDF 인쇄 전 페이지 경계를 확인하세요.</p>
+    </section>
+    <section id="import-panel" class="panel-content" hidden>
+      <div id="import-empty" class="empty">파일을 가져오면 추출 결과가 여기에 표시됩니다. 문서 내용은 이 컴퓨터에서 처리됩니다.</div>
+      <div id="import-review" hidden>
+        <h2 id="import-title"></h2><p id="import-meta" class="hint"></p><p id="import-warning" class="warning"></p>
+        <label class="field-label" for="import-text">추출 텍스트 검토 및 수정</label><textarea id="import-text" rows="13"></textarea>
+        <label class="field-label" for="import-type">새 프로젝트 유형</label><select id="import-type"><option value="cv">CV / 이력서</option><option value="slides">슬라이드</option><option value="report">보고서</option><option value="dashboard">대시보드</option></select>
+        <button id="create-from-import" class="button primary wide">검토한 내용으로 새 프로젝트 만들기</button>
+        <button id="attach-source" class="button wide">현재 프로젝트에 출처만 첨부</button>
+        <p class="hint">원본 파일은 현재 브라우저 세션에만 남습니다. JSON에는 추출 텍스트와 출처 정보가 저장됩니다. 원본 레이아웃이나 스캔 PDF OCR은 복원하지 않습니다.</p>
+      </div>
+    </section>
+    <section id="json-panel" class="panel-content" hidden><p class="hint">고급 편집입니다. 적용 전 현재 프로젝트는 되돌리기 기록에 남습니다.</p><textarea id="json" spellcheck="false" rows="26"></textarea><p id="json-error" class="warning"></p><button id="apply-json" class="button">JSON 적용</button></section>
+  </aside>
+</div>
+</body>
+</html>
