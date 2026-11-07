@@ -6,6 +6,7 @@ import {createServer} from 'node:http';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {render, audit, types, themes} from '../src/engine.mjs';
+import {resolveStudioPath} from '../src/request-path.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const help=`Personal Design Studio · local-first design workbench
 
@@ -35,8 +36,8 @@ function browserOutput(html,name,isPdf){const exe=chrome();if(!exe)throw Error('
  const proc=spawnSync(exe,flags,{encoding:'utf8',timeout:12000});if(proc.status!==0||!existsSync(name))throw Error('Browser export failed: '+(proc.stderr||'exit '+proc.status).slice(0,600));console.log('Exported:',name);
  }).finally(async()=>{const {rm}=await import('node:fs/promises');await rm(tmp,{force:true})})}
 async function server(){const port=Number(flag('--port','4177'));const mime={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml'};const srv=createServer(async(req,res)=>{
-  try{const route=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname);const target=resolve(root, '.'+(route==='/'?'/studio/index.html':route));
-    if(!target.startsWith(root+'/')||!['/studio/','/src/','/examples/'].some(p=>(route==='/'?'/studio/':route).startsWith(p))) {res.writeHead(403);res.end('Forbidden');return}
+  try{const route=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname);const target=resolveStudioPath(root,route);
+    if(!target) {res.writeHead(403);res.end('Forbidden');return}
     const content=await readFile(target);res.writeHead(200,{'content-type':mime[extname(target)]||'application/octet-stream','cache-control':'no-store','x-content-type-options':'nosniff','content-security-policy':"default-src 'self' 'unsafe-inline' blob: data:; connect-src 'self'; object-src 'none'; base-uri 'none'"});res.end(content);
   }catch{res.writeHead(404);res.end('Not found')}});
  srv.listen(port,'127.0.0.1',()=>console.log(`Studio ready: http://127.0.0.1:${port}\nFiles stay on this computer. Press Ctrl+C to stop.`));

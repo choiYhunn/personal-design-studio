@@ -28,6 +28,17 @@ npm start
 
 In the visual studio, choose a workspace, edit key fields, or switch to **Advanced JSON** to add slides, projects, metrics, and sections. Preview updates locally. Download the standalone **HTML** or editable **JSON**. Use **PDF Print** (browser print dialog) to save PDF. Local browser storage is a convenience, not a backup; periodically export JSON.
 
+
+### Codex / Claude Code auto-discovery
+
+When you **open this repository as the working directory**, Codex reads `AGENTS.md` and discovers `.agents/skills/personal-design-studio/SKILL.md`; Claude Code reads `CLAUDE.md` and discovers `.claude/skills/personal-design-studio/SKILL.md`. A relevant design request **can** activate the skill automatically, but agent choice is not guaranteed; you can explicitly invoke `$personal-design-studio` in Codex or `/personal-design-studio` in Claude Code. The legacy `/design` Claude command is also available.
+
+This is **repository-scoped**. Opening a different project or a general chat does not automatically load this tool. Installing it for all projects requires a separate user-level skill setup. The core tool also does not autonomously call Oh My Design or slides-grab; those are optional, external integrations.
+
+### If the browser says Forbidden
+
+Use **`npm start` from the repository root on your computer** and then open the exact terminal URL **`http://127.0.0.1:4177/`**. GitHub's repository URL is source code, not a hosted editor or GitHub Pages website. Versions before the Windows path check fix could return `Forbidden` even on `/`; after updating, restart the server and retry. If the port is occupied, use `node bin/studio.mjs serve --port 4178` and open `http://127.0.0.1:4178/` instead. The studio intentionally rejects requests outside `/studio/`, `/src/`, and `/examples/`.
+
 ### Command-line automation
 
 ```bash
