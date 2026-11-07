@@ -9,14 +9,15 @@ import {render, audit, types, themes} from '../src/engine.mjs';
 import {normalizeProject, projectFromImport} from '../src/project.mjs';
 import {importBytes, supportedFormats} from '../src/importer.mjs';
 import {embedFonts} from '../src/export.mjs';
+import {presets,applyPreset} from '../src/presets.mjs';
 import {resolveStudioPath} from '../src/request-path.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const help=`Personal Design Studio · local-first design workbench
 
 Usage:
   npm start                            Open visual editor on http://127.0.0.1:4177
-  node bin/studio.mjs init <type> [-o project.json]
-  node bin/studio.mjs import <document> --type <type> [-o project.json]
+  node bin/studio.mjs init <type> [--preset id] [-o project.json]
+  node bin/studio.mjs import <document> --type <type> [--preset id] [-o project.json]
   node bin/studio.mjs presets list
   node bin/studio.mjs fonts list
   node bin/studio.mjs audit <project.json> [--strict]
@@ -30,11 +31,20 @@ PDF and screenshots require locally installed Chrome/Chromium. No API key requir
 `;
 const args=process.argv.slice(2);const command=args[0]||'help';
 const flag=(name,defaultValue)=>{let i=args.indexOf(name);return i>=0&&args[i+1]?args[i+1]:defaultValue};
-const positional=args.slice(1).filter((v,i,a)=>{if(['-o','--out','--port','--type'].includes(a[i-1]))return false;return !v.startsWith('-')&&!(a[i+1]&&['-o','--out','--port','--type'].includes(v));});
+const positional=args.slice(1).filter((v,i,a)=>{if(['-o','--out','--port','--type','--preset'].includes(a[i-1]))return false;return !v.startsWith('-')&&!(a[i+1]&&['-o','--out','--port','--type','--preset'].includes(v));});
 const outputFile=(fallback)=>resolve(flag('-o',flag('--out',fallback)));
 async function load(name){if(!name)throw Error('Input project JSON is required');return normalizeProject(JSON.parse(await readFile(resolve(name),'utf8')))}
 async function save(path,data){await mkdir(dirname(path),{recursive:true});await writeFile(path,data);console.log('Saved:',path)}
-function chrome(){const env=process.env.CHROME_PATH;const names=[env,'chromium','chromium-browser','google-chrome','chrome'].filter(Boolean);for(const name of names){const p=spawnSync(process.platform==='win32'?'where':'which',[name],{encoding:'utf8'});if(p.status===0)return p.stdout.trim().split(/\r?\n/)[0]}return null}
+function chrome(){
+ const env=process.env.CHROME_PATH;
+ const win=process.platform==='win32'?[join(process.env.PROGRAMFILES||'C:\\Program Files','Google','Chrome','Application','chrome.exe'),join(process.env['PROGRAMFILES(X86)']||'C:\\Program Files (x86)','Microsoft','Edge','Application','msedge.exe')]:[];
+ for(const name of [env,...win,'chromium','chromium-browser','google-chrome','chrome'].filter(Boolean)){
+  if(existsSync(name))return name;
+  const p=spawnSync(process.platform==='win32'?'where':'which',[name],{encoding:'utf8'});
+  if(p.status===0)return p.stdout.trim().split(/\r?\n/)[0];
+ }
+ return null;
+}
 function browserOutput(html,name,isPdf){const exe=chrome();if(!exe)throw Error('Chromium/Chrome not found. Install Chromium or set CHROME_PATH.');const tmp=resolve(dirname(name),'.design-studio-preview.html');return save(tmp,html).then(()=>{
  const flags=['--headless','--disable-gpu','--disable-dev-shm-usage','--hide-scrollbars','--no-first-run','--disable-extensions','--virtual-time-budget=2000',`--window-size=${isPdf?'1350,900':'1440,1000'}`];if(process.getuid?.()===0)flags.push('--no-sandbox');
  if(isPdf)flags.push('--print-to-pdf='+name,'--no-pdf-header-footer');else flags.push('--screenshot='+name);
@@ -57,18 +67,19 @@ try{
  if(command==='help'||command==='--help'||command==='-h')console.log(help);
  else if(command==='serve')await server();
  else if(command==='doctor'){console.log('Node:',process.version,Number(process.versions.node.split('.')[0])>=20?'OK':'Requires Node 20+');console.log('Browser:',chrome()||'not found (PDF/screenshot unavailable)');console.log('Modules: built in; API keys: none; network: none');}
- else if(command==='init'){const t=positional[0];if(!types.includes(t))throw Error('Expected type: '+types.join(', '));await copyFile(join(root,'examples',t+'.json'),outputFile(t+'.json'));console.log('Created:',outputFile(t+'.json'));}
+ else if(command==='init'){const t=positional[0];if(!types.includes(t))throw Error('Expected type: '+types.join(', '));const output=outputFile(t+'.json');if(args.includes('--preset')){const doc=normalizeProject(JSON.parse(await readFile(join(root,'examples',t+'.json'),'utf8')));applyPreset(doc,flag('--preset'));await save(output,JSON.stringify(doc,null,2)+'\n');}else{await copyFile(join(root,'examples',t+'.json'),output);console.log('Created:',output);}}
  else if(command==='import'){
   const path=positional[0], type=flag('--type','report');if(!path)throw Error('Input document path is required');
   const {basename}=await import('node:path');const result=await importBytes({name:basename(path),bytes:await readFile(resolve(path))});
   const project=result.project || projectFromImport(result,type);
+  if(args.includes('--preset'))applyPreset(project,flag('--preset'));
   const output=outputFile(path.replace(/\.[^.]+$/,'.studio.json'));
   if(existsSync(output))throw Error(`Output already exists: ${output}. Choose another -o path.`);
   await save(output,JSON.stringify(project,null,2)+'\n');
   console.log('Import:',result.format,'·',result.warnings.join(' | ')||'text extracted locally');
  }
  else if(command==='fonts' && positional[0]==='list'){const {fontPairs}=await import('../src/design.mjs');for(const f of fontPairs)console.log(f.id+'\t'+f.name);}
- else if(command==='presets' && positional[0]==='list'){console.log('Preset registry is not installed yet; four legacy themes are available: '+themes.join(', '));}
+ else if(command==='presets' && positional[0]==='list'){for(const p of presets)console.log(`${p.type}\t${p.id}\t${p.name}\t${p.description}`);}
  else if(['audit','build','pdf','screenshot'].includes(command)){
   const file=positional[0];const doc=await load(file);const result=audit(doc);
   if(command==='audit'){console.log(JSON.stringify(result,null,2));if(!result.ok||(args.includes('--strict')&&result.warnings.length))process.exitCode=1;}

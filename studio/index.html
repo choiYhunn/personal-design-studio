@@ -37,7 +37,7 @@
     <div id="import-list" class="import-list" aria-live="polite"></div>
   </aside>
   <main class="canvas-area">
-    <div class="canvas-header"><div><p class="overline">LIVE CANVAS</p><h1 id="canvas-title">프로젝트를 여는 중</h1></div><div id="save-status" class="save-status">준비 중</div></div>
+    <div class="canvas-header"><div><p class="overline">LIVE CANVAS</p><h1 id="canvas-title">프로젝트를 여는 중</h1></div><div class="canvas-controls"><select id="compare-preset" aria-label="비교할 디자인" hidden></select><div id="save-status" class="save-status">준비 중</div></div></div>
     <div class="canvas-grid"><iframe id="frame" title="현재 디자인 미리보기" sandbox="allow-same-origin allow-scripts"></iframe><iframe id="compare-frame" title="비교 디자인 미리보기" sandbox="allow-same-origin allow-scripts" hidden></iframe></div>
     <div id="audit" class="audit" role="status">검사 중</div>
   </main>
@@ -47,6 +47,8 @@
     <section id="design-panel" class="panel-content" hidden>
       <label class="field-label" for="theme">색상 테마</label><select id="theme"></select>
       <label class="field-label" for="font-pair">글꼴 조합</label><select id="font-pair"></select>
+      <div id="font-controls"></div>
+      <details><summary>색상 토큰 조절</summary><div id="color-controls"></div></details>
       <details><summary>타이포그래피와 여백 조절</summary><div id="type-controls"></div></details>
       <p class="hint">프리셋이 기본값을 정합니다. 필요한 값만 조절하세요. PDF 인쇄 전 페이지 경계를 확인하세요.</p>
     </section>
@@ -64,5 +66,6 @@
     <section id="json-panel" class="panel-content" hidden><p class="hint">고급 편집입니다. 적용 전 현재 프로젝트는 되돌리기 기록에 남습니다.</p><textarea id="json" spellcheck="false" rows="26"></textarea><p id="json-error" class="warning"></p><button id="apply-json" class="button">JSON 적용</button></section>
   </aside>
 </div>
+<dialog id="new-dialog"><h2>새 프로젝트</h2><p>빈 문서에서 시작합니다. 기존 작업은 그대로 남습니다.</p><label for="new-type">문서 유형</label><select id="new-type"><option value="cv">CV / 이력서</option><option value="slides">슬라이드</option><option value="report">보고서</option><option value="dashboard">대시보드</option></select><label for="new-title">제목</label><input id="new-title" type="text" placeholder="작업 제목"><label for="new-preset">시작 디자인</label><select id="new-preset"></select><div class="dialog-actions"><button id="cancel-new" class="button">취소</button><button id="confirm-new" class="button primary">만들기</button></div></dialog>
 </body>
 </html>

@@ -16,7 +16,7 @@ The parser is text-centric. PDF line grouping, DOCX heading styles, PPTX notes/i
 
 ## Type and fonts
 
-`src/design.mjs` defines independent color, font and layout measurements. Font pair choices resolve to self-hosted Fontsource Noto Sans KR, Noto Serif KR, Inter, Source Serif 4 and IBM Plex Mono packages. Each is OFL-1.1; package licenses are present in `node_modules/@fontsource/*/LICENSE`. `src/export.mjs` embeds the used WOFF2 subsets and their full license text into standalone HTML. Browser preview loads those same assets from the local server. CSS restricts numeric values and color overrides before interpolation. CJK and Latin coverage depends on the included Korean and Latin subsets; missing glyphs fall back to local system fonts.
+`src/presets.mjs` is the shared registry of 24 type-specific composition presets. The browser renders real project data into its gallery and A/B canvas; the CLI accepts the same `preset` field and exposes `presets list`. Presets configure information order and CSS composition as well as their default palette and font pair. `src/design.mjs` defines independent color, font and layout measurements. Twelve font pair choices resolve to five self-hosted Fontsource families: Noto Sans KR, Noto Serif KR, Inter, Source Serif 4 and IBM Plex Mono. Each is OFL-1.1; package licenses are present in `node_modules/@fontsource/*/LICENSE`. `src/export.mjs` embeds WOFF2 subsets and their full license text into standalone HTML. Browser preview loads those same assets from the local server. CSS restricts numeric values and color overrides before interpolation. CJK and Latin coverage depends on the included Korean and Latin subsets; missing glyphs fall back to local system fonts.
 
 ## Running checks
 
@@ -27,11 +27,11 @@ npm run check
 npm audit --omit=dev --audit-level=high
 ```
 
-`tests/fixtures` contains only generated, fictional documents. Tests verify parsing, malformed input, v0.1 migration, renderer output, font embedding and the Windows Forbidden regression. CI runs on Linux Node 22. Browser screenshot review and Windows CLI execution remain manual quality gates; the deterministic audit does not prove that every page is visually balanced or fits when fonts/content change.
+`tests/fixtures` contains only generated, fictional documents. Tests verify parsing, malformed input, v0.1 migration, all preset renderings, renderer output, font embedding and the Windows Forbidden regression. CI runs on Linux Node 22. Manual Windows Chrome review covered one and two page CVs, a 10 slide research deck, a technical report and a KPI dashboard. The dashboard print style uses A4 landscape. Browser screenshot review and Windows CLI execution remain manual quality gates; the deterministic audit does not prove that every page is visually balanced or fits when fonts/content change. A long CV section can continue onto the next page without repeating its section heading.
 
 ## Current boundaries
 
 - HTML and JSON are editable/exportable. PDF uses browser print or a locally installed Chrome/Chromium. There is no editable DOCX/PPTX output.
-- The gallery currently uses four legacy themes. It does not yet provide 24 distinct layout presets.
+- The gallery has 24 layout presets and retains four legacy color themes. Slide editing is form-based and selection of rendered text focuses the corresponding input; it is not free pixel editing.
 - The browser's local storage is convenience autosave, not a backup; exported JSON is the portable project file.
 - Oh My Design and slides-grab remain optional external workflows described in `docs/INTEGRATIONS.md`.
